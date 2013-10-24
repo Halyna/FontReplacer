@@ -100,8 +100,11 @@ static void initializeReplacementFonts()
     initializeReplacementFonts();
     NSString *originalFontName = descriptor.fontAttributes[UIFontDescriptorNameAttribute];
     NSString *replacementFontName = replacementDictionary[originalFontName];
-    UIFontDescriptor *newDescriptor = [descriptor fontDescriptorByAddingAttributes:@{UIFontDescriptorNameAttribute: replacementFontName}];
-    return [self replacement_fontWithDescriptor:newDescriptor size:pointSize];
+    if (replacementFontName)
+    {
+        descriptor = [descriptor fontDescriptorByAddingAttributes:@{UIFontDescriptorNameAttribute: replacementFontName}];
+    }
+    return [self replacement_fontWithDescriptor:descriptor size:pointSize];
 }
 
 @end
